@@ -34,7 +34,7 @@ public class CatalogController{
 		return "catalog.html";
 	}
 	
-	@RequestMapping(value = "/catlog/albums/{pageNumber}", method = RequestMethod.GET)
+	@RequestMapping(value = "/catlog/photographers/{pageNumber}", method = RequestMethod.GET)
 	public String displayPhotographers(@PathVariable("pageNumber") Integer pageNumber) {
 		
 		return "catalog.html";
