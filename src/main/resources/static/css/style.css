@@ -15,7 +15,6 @@
 	width: fit-content;
 	font-size: 70px;
 	padding: 10px;
-	display: inline-block;
 }
 
 .top-menu{
@@ -125,6 +124,10 @@ ul li ul:hover {
 	background-repeat: no-repeat;
 }
 
+.img-box {
+	cursor: pointer;
+}
+
 .cart {
 	position:fixed;
 	width: 500px;
@@ -158,6 +161,10 @@ ul li ul:hover {
 	text-align: left;
 	font-size: 1.2em;
 	border-bottom:solid 1px #000;
+}
+
+svg:hover {
+	cursor: pointer;
 }
 
 .over {

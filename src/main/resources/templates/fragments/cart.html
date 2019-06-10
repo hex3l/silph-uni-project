@@ -13,9 +13,9 @@
 	<th:block th:fragment="cart">
 		<div class='cart'>
 			<div class='cart-title'>
-				SELECTED IMAGES <i style='float:right;padding:7px;'class='fas fa-caret-up fa-rotate-180' onClick='hideShowCart()'></i>
+				SELECTED IMAGES <i id='cart-sh' style='float:right;padding:7px;'class='fas fa-caret-up fa-rotate-180' onClick='hideShowCart()'></i>
 			</div>
-			<div class='cart-list'>
+			<div class='cart-list' id='cart-list'>
 				<table>
 					<col width='10%'>
 					<col width='82%'>
@@ -28,20 +28,64 @@
 				</table>
 				
 				<div class='over'>
-					<table>
+					<table id="cart">
 						<col width='10%'>
 						<col width='88%'>
 						<col width='10%'>
-						<th:block th:each="photo : ${selected}">
-							<tr th:id="${photo.id}">
+						<tbody>
+						<th:block th:each="photo : ${selected}" >
+							<tr th:id="cart-${photo.id}">
 								<td th:text="${photo.id}"></td>
 								<td th:text="${photo.name}"></td>
-								<td><i class='fas fa-times' th:onclick="'cartRemove(\'' + ${photo.id} + '\');'"></i></td>
+								<td><i class='fas fa-times' th:onclick='cartRemove(${photo.id});'></i></td>
 							</tr>
 						</th:block>
+						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+		<script>
+		let cartRemove = function (id) {
+            $.ajax({
+                type: "POST",
+                url: "/cart/remove/" + id,
+                success: function () {
+                	$('#cart-' + id).remove();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+        }
+		
+		let cartAdd = function (id) {
+            $.ajax({
+                type: "POST",
+                url: "/cart/add/" + id,
+                success: function (data) {
+                	var response = jQuery.parseJSON(data);
+                	console.log(data)
+                	$('#cart tbody').append("<tr id='cart-"+ id +"'><td>"+ id +"</td><td>"+ response.name +"</td><td><i class='fas fa-times' onclick='cartRemove(" + id + ");'></i></td></tr>");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+        }
+		
+		let hideShowCart = function () {
+			if($('#cart-list').css('display') == 'none'){
+				$('#cart-list').show();
+				if(!$('#cart-sh').hasClass('fa-rotate-180')) $('#cart-sh').addClass('fa-rotate-180');
+			} else {
+				$('#cart-list').hide();
+				$('#cart-sh').removeClass('fa-rotate-180');
+			}
+			
+		}
+		</script>
 	</th:block>
 </body>
