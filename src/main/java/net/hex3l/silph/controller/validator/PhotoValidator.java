@@ -4,11 +4,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-public class ImageValidator implements Validator {
+import net.hex3l.silph.model.data.Photo;
+
+public class PhotoValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return false;
+		return Photo.class.equals(clazz);
 	}
 	
 	@Override

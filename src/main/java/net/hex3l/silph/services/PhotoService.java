@@ -1,0 +1,27 @@
+package net.hex3l.silph.services;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import net.hex3l.silph.model.data.Photo;
+import net.hex3l.silph.repository.PhotoRepository;
+
+public class PhotoService {
+	@Autowired
+	private PhotoRepository photoRepository;
+	
+	@Transactional
+	public Photo inserisci(Photo photo) {
+		return this.photoRepository.save(photo);
+	}
+	
+	@Transactional 
+	public List<Photo> tutte() {
+		return (List<Photo>) photoRepository.findAll();
+	}
+
+}
