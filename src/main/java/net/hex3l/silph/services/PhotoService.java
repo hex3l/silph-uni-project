@@ -5,11 +5,12 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 import net.hex3l.silph.model.data.Photo;
 import net.hex3l.silph.repository.PhotoRepository;
 
+@Service
 public class PhotoService {
 	@Autowired
 	private PhotoRepository photoRepository;

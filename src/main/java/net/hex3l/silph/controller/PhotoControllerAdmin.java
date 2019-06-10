@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import net.hex3l.silph.controller.validator.PhotoValidator;
 import net.hex3l.silph.model.data.Photo;
-import net.hex3l.silph.repository.PhotoRepository;
 import net.hex3l.silph.services.PhotoService;
 
 @Controller
