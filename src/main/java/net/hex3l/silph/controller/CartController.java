@@ -1,8 +1,10 @@
 package net.hex3l.silph.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,11 +33,11 @@ public class CartController {
 		if(opt.isPresent()) {
 			Photo photo = opt.get();
 			String name = photo.getName();
-			List<Long> photosCart;
+			Set<Long> photosCart;
 			if(session.getAttribute("photos")==null) {
-				photosCart = new ArrayList<>();
+				photosCart = new HashSet<>();
 			} else {
-				photosCart = (List<Long>) session.getAttribute("photos");
+				photosCart = (Set<Long>) session.getAttribute("photos");
 			}
 			photosCart.add(photoId);
 			session.setAttribute("photos", photosCart);
@@ -52,7 +54,7 @@ public class CartController {
 		String body = "";
 		
 		//Session handler here
-		List<Long> photosCart = (List<Long>) session.getAttribute("photos");
+		Set<Long> photosCart = (Set<Long>) session.getAttribute("photos");
 		photosCart.remove(photoId);
 		session.setAttribute("photos", photosCart);
 		
