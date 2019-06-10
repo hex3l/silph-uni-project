@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' href='css/style.css' />
+	<link rel='stylesheet' href='/css/style.css' />
 	<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
 	integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
 	crossorigin="anonymous"></script>
@@ -10,7 +10,7 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div th:fragment="cart">
+	<th:block th:fragment="cart">
 		<div class='cart'>
 			<div class='cart-title'>
 				SELECTED IMAGES <i style='float:right;padding:7px;'class='fas fa-caret-up fa-rotate-180' onClick='hideShowCart()'></i>
@@ -33,8 +33,8 @@
 						<col width='88%'>
 						<col width='10%'>
 						<th:block th:each="photo : ${selected}">
-							<tr id="${photo.id}">
-								<td th:text="${photo.id}""></td>
+							<tr th:id="${photo.id}">
+								<td th:text="${photo.id}"></td>
 								<td th:text="${photo.name}"></td>
 								<td><i class='fas fa-times' th:onclick="'cartRemove(\'' + ${photo.id} + '\');'"></i></td>
 							</tr>
@@ -43,5 +43,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</th:block>
 </body>

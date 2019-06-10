@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>		
-	<link rel='stylesheet' href='css/style.css' />
+	<link rel='stylesheet' href='/css/style.css' />
 	<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
 	integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
 	crossorigin="anonymous"></script>
@@ -10,7 +10,7 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div th:fragment="header">
+	<th:block th:fragment="header">
 		<div class='header'>
 			<div class='content'>
 				<div class='title'>Silph</div>
@@ -22,7 +22,7 @@
 									<i class='fas fa-home'></i> GALLERY
 								</a>
 							</li>
-							<li id='nav-usage'>
+							<li id='nav-usage'>git pull origin master
 								<a href='#'>
 									<i class='fas fa-envelope'></i> REQUEST USAGE
 								</a>
@@ -38,5 +38,5 @@
 			</div>		
 		</div>
 		<div class='h100px'></div>
-	</div>
+	</th:block>
 </body>

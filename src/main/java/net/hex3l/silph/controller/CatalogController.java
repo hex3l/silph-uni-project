@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import net.hex3l.silph.repository.AlbumRepository;
 import net.hex3l.silph.repository.PhotoRepository;
@@ -22,21 +23,33 @@ public class CatalogController{
 	@Autowired
 	private PhotographerRepository photographerRepository;
 	
-	@RequestMapping(value = "/catlog/photos/{pageNumber}", method = RequestMethod.GET)
-	public String displayPhotos(@PathVariable("pageNumber") Integer pageNumber) {
-		
-		return "catalog.html";
+	@RequestMapping(value = "/catalog/photos/{pageNumber}", method = RequestMethod.GET)
+	public ModelAndView displayPhotos(@PathVariable("pageNumber") Integer pageNumber) {
+		ModelAndView mav = new ModelAndView("photolist");
+		//TODO: remove findAll() create new method in @PhotoRepository to extract pages
+        mav.addObject("catalog", photoRepository.findAll());
+		return mav;
 	}
 	
-	@RequestMapping(value = "/catlog/albums/{pageNumber}", method = RequestMethod.GET)
-	public String displayAlbums(@PathVariable("pageNumber") Integer pageNumber) {
-		
-		return "catalog.html";
+	@RequestMapping(value = "/catalog/photos", method = RequestMethod.GET)
+	public ModelAndView displayPhotos() {
+		ModelAndView mav = new ModelAndView("photolist");
+		//TODO: remove findAll() create new method in @PhotoRepository to extract pages
+        mav.addObject("catalog", photoRepository.findAll());
+		return mav;
 	}
 	
-	@RequestMapping(value = "/catlog/photographers/{pageNumber}", method = RequestMethod.GET)
-	public String displayPhotographers(@PathVariable("pageNumber") Integer pageNumber) {
+	@RequestMapping(value = "/catalog/albums/{pageNumber}", method = RequestMethod.GET)
+	public ModelAndView displayAlbums(@PathVariable("pageNumber") Integer pageNumber) {
+		ModelAndView mav = new ModelAndView("albumlist");
 		
-		return "catalog.html";
+		return mav;
+	}
+	
+	@RequestMapping(value = "/catalog/photographers/{pageNumber}", method = RequestMethod.GET)
+	public ModelAndView displayPhotographers(@PathVariable("pageNumber") Integer pageNumber) {
+		ModelAndView mav = new ModelAndView("photographerslist");
+		
+		return mav;
 	}
 }

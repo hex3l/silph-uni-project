@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<link rel='stylesheet' href='css/style.css' />
+		<link rel='stylesheet' href='/css/style.css' />
 		<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
 		integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
 		crossorigin="anonymous"></script>
@@ -10,13 +10,13 @@
 	</head>
 	<body>
 		<div th:replace="fragments/header :: header"></div>
-		<div class='content'>
-			<div class='images'>
-				<th:block th:each="photo : ${catalog}">
-					<div class='img-box' th:style="'background:url(' + ${photo.image} + ');'" th:onclick="'cartAdd(\'' + ${photo.id} + '\');'"></div>
-				</th:block>
+			<div class='content'>
+				<div class='images'>
+					<th:block th:each="photo : ${catalog}">
+						<div class='img-box' th:style="'background:url(' + ${photo.image} + ');background-size: contain;background-position: center;background-repeat: no-repeat;'" th:onclick="'cartAdd(\'' + ${photo.id} + '\');'"></div>
+					</th:block>
+				</div>
 			</div>
-		</div>
 		<div th:replace="fragments/cart :: cart"></div>
 	</body>
 </html>
