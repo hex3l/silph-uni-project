@@ -1,8 +1,14 @@
 package net.hex3l.silph.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,29 +25,37 @@ public class CartController {
 	PhotoRepository photoRepository;
 	
 	@RequestMapping(value = "/cart/add/{photoId}", method = RequestMethod.POST)
-	public @ResponseBody byte[] addPhoto(@PathVariable("photoId") Long photoId) {
+	public ResponseEntity<String> addPhoto(@PathVariable("photoId") Long photoId, HttpSession session) {
 		String body = "";
-		String name = "";
 		Optional<Photo> opt = photoRepository.findById(photoId);
 		if(opt.isPresent()) {
 			Photo photo = opt.get();
-			name = photo.getName();
-
-			//Session handler here
+			String name = photo.getName();
+			List<Long> photosCart;
+			if(session.getAttribute("photos")==null) {
+				photosCart = new ArrayList<>();
+			} else {
+				photosCart = (List<Long>) session.getAttribute("photos");
+			}
+			photosCart.add(photoId);
+			session.setAttribute("photos", photosCart);
 			
 			body = "{\"name\":\"" + name + "\"}";
+			return new ResponseEntity<String>(body, HttpStatus.OK);
 		} else {
-			//Error
+			return new ResponseEntity<String>(body, HttpStatus.NOT_ACCEPTABLE);
 		}
-		
-		return body.getBytes();
 	}
 	
 	@RequestMapping(value = "/cart/remove/{photoId}", method = RequestMethod.POST)
-	public @ResponseBody byte[] removePhoto(@PathVariable("photoId") Long photoId) {
+	public @ResponseBody byte[] removePhoto(@PathVariable("photoId") Long photoId, HttpSession session) {
 		String body = "";
 		
 		//Session handler here
+		List<Long> photosCart = (List<Long>) session.getAttribute("photos");
+		photosCart.remove(photoId);
+		session.setAttribute("photos", photosCart);
+		
 		
 		return body.getBytes();
 	}
