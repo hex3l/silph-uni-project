@@ -33,11 +33,11 @@
 						<col width='88%'>
 						<col width='10%'>
 						<tbody>
-						<th:block th:each="photo : ${selected}" >
-							<tr th:id="cart-${photo.id}">
+						<th:block th:each="photo : ${selection}" >
+							<tr th:id="'cart-' + ${photo.id}">
 								<td th:text="${photo.id}"></td>
 								<td th:text="${photo.name}"></td>
-								<td><i class='fas fa-times' th:onclick='cartRemove(${photo.id});'></i></td>
+								<td><i class='fas fa-times' th:onclick="'cartRemove(' + ${photo.id} + ');'"></i></td>
 							</tr>
 						</th:block>
 						</tbody>
