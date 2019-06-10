@@ -14,7 +14,7 @@ import net.hex3l.silph.model.data.Photo;
 import net.hex3l.silph.repository.PhotoRepository;
 
 @Controller
-public class ImageController{
+public class PhotoController{
 	
 	@Autowired
 	PhotoRepository photoRepository;

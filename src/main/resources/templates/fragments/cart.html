@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href='css/style.css' />
+	<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+	integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div th:fragment="cart">
+		<div class='cart'>
+			<div class='cart-title'>
+				SELECTED IMAGES <i style='float:right;padding:7px;'class='fas fa-caret-up fa-rotate-180' onClick='hideShowCart()'></i>
+			</div>
+			<div class='cart-list'>
+				<table>
+					<col width='10%'>
+					<col width='82%'>
+					<col width='10%'>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Action</th>
+					</tr>
+				</table>
+				
+				<div class='over'>
+					<table>
+						<col width='10%'>
+						<col width='88%'>
+						<col width='10%'>
+						<th:block th:each="photo : ${selected}">
+							<tr id="${photo.id}">
+								<td th:text="${photo.id}""></td>
+								<td th:text="${photo.name}"></td>
+								<td><i class='fas fa-times' th:onclick="'cartRemove(\'' + ${photo.id} + '\');'"></i></td>
+							</tr>
+						</th:block>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

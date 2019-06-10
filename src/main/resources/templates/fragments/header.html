@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>		
+	<link rel='stylesheet' href='css/style.css' />
+	<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+	integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div th:fragment="header">
+		<div class='header'>
+			<div class='content'>
+				<div class='title'>Silph</div>
+				<div class='top-menu'>
+					<div class='menu'>
+						<ul>
+							<li class='standard' id='nav-gallery'>
+								<a href='#'>
+									<i class='fas fa-home'></i> GALLERY
+								</a>
+							</li>
+							<li id='nav-usage'>
+								<a href='#'>
+									<i class='fas fa-envelope'></i> REQUEST USAGE
+								</a>
+							</li>
+							<li id='nav-admin' style='float:right;'>
+								<a href='#'>
+									<i class='fas fa-user-shield'></i> ADMIN
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>		
+		</div>
+		<div class='h100px'></div>
+	</div>
+</body>

@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import net.hex3l.silph.model.data.Photographer;
 
-public interface PhotorapherRepository extends CrudRepository<Photographer, Long> {
+public interface PhotographerRepository extends CrudRepository<Photographer, Long> {
 
 }
