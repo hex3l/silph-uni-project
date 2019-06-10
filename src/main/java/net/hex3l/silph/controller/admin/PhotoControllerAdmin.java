@@ -1,4 +1,4 @@
-package net.hex3l.silph.controller;
+package net.hex3l.silph.controller.admin;
 
 import javax.validation.Valid;
 
