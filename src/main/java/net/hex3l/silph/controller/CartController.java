@@ -39,6 +39,9 @@ public class CartController {
 			} else {
 				photosCart = (Set<Long>) session.getAttribute("photos");
 			}
+			if(photosCart.contains(photoId)) {
+				return new ResponseEntity<String>(body, HttpStatus.NOT_ACCEPTABLE);
+			}
 			photosCart.add(photoId);
 			session.setAttribute("photos", photosCart);
 			

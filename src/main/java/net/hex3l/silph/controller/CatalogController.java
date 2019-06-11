@@ -1,6 +1,7 @@
 package net.hex3l.silph.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,7 +40,7 @@ public class CatalogController{
         mav.addObject("catalog", photoRepository.findAll());
         Object selection = session.getAttribute("photos");
         if(selection != null) {
-        	List<Photo> list = (List<Photo>) photoService.findAllById((List<Long>) selection);
+        	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>) selection);
         	
         	mav.addObject("selection", list);
         }
