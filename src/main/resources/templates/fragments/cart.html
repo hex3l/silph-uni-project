@@ -54,8 +54,7 @@
                 	$('#cart-' + id).remove();
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
+					//TODO: error
                 }
             });
         }
@@ -70,8 +69,7 @@
                 	$('#cart tbody').append("<tr id='cart-"+ id +"'><td>"+ id +"</td><td>"+ response.name +"</td><td><i class='fas fa-times' onclick='cartRemove(" + id + ");'></i></td></tr>");
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
+                	//TODO: error
                 }
             });
         }

@@ -54,7 +54,7 @@ public class CatalogController{
         mav.addObject("catalog", photoRepository.findAll());
         Object selection = session.getAttribute("photos");
         if(selection != null) {
-        	List<Photo> list = (List<Photo>) photoService.findAllById((List<Long>) selection);
+        	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>)selection);
         	
         	mav.addObject("selection", list);
         }
