@@ -11,11 +11,7 @@
 	<body>
 		<div th:replace="fragments/header :: header"></div>
 			<div class='content'>
-				<div class='images'>
-					<th:block th:each="photo : ${catalog}">
-						<div class='img-box' th:style="'background:url(' + ${photo.image} + ');background-size: contain;background-position: center;background-repeat: no-repeat;'" th:onclick="'cartAdd(\'' + ${photo.id} + '\');'"></div>
-					</th:block>
-				</div>
+				<div th:replace="fragments/catalog/photolist :: photolist"></div>
 			</div>
 		<div th:replace="fragments/cart :: cart"></div>
 	</body>

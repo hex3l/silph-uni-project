@@ -35,7 +35,7 @@ public class CatalogController{
 	
 	@RequestMapping(value = "/catalog/photos/{pageNumber}", method = RequestMethod.GET)
 	public ModelAndView displayPhotos(@PathVariable("pageNumber") Integer pageNumber, HttpSession session) {
-		ModelAndView mav = new ModelAndView("photolist");
+		ModelAndView mav = new ModelAndView("catalog/photos");
 		//TODO: remove findAll() create new method in @PhotoRepository to extract pages
         mav.addObject("catalog", photoRepository.findAll());
         Object selection = session.getAttribute("photos");
@@ -49,7 +49,7 @@ public class CatalogController{
 	
 	@RequestMapping(value = "/catalog/photos", method = RequestMethod.GET)
 	public ModelAndView displayPhotos(HttpSession session) {
-		ModelAndView mav = new ModelAndView("photolist");
+		ModelAndView mav = new ModelAndView("catalog/photos");
 		//TODO: remove findAll() create new method in @PhotoRepository to extract pages
         mav.addObject("catalog", photoRepository.findAll());
         Object selection = session.getAttribute("photos");
