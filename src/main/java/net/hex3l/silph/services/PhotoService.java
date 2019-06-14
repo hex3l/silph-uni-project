@@ -21,17 +21,14 @@ public class PhotoService {
 		return this.photoRepository.save(photo);
 	}
 	
-	@Transactional
 	public Iterable<Photo> findAllById(Iterable<Long> ids) {
 		return this.photoRepository.findAllById(ids);
 	}
 	
-	@Transactional 
 	public List<Photo> tutte() {
 		return (List<Photo>) photoRepository.findAll();
 	}
 	
-	@Transactional
 	public List<Photo> photoPage(int page) {
 		return photoRepository.findAll(PageRequest.of(page, 4)).getContent();
 	}

@@ -43,7 +43,7 @@ public class CatalogController{
 	@RequestMapping(value = "/catalog/photos", method = RequestMethod.GET)
 	public ModelAndView displayPhotos(HttpSession session) {
 		ModelAndView mav = new ModelAndView("catalog/photos");
-		  mav.addObject("catalog", photoService.photoPage(1));
+		mav.addObject("catalog", photoService.photoPage(0));
 		return photoSelection(mav, session);
 	}
 	
@@ -51,7 +51,6 @@ public class CatalogController{
 		Object selection = session.getAttribute("photos");
         if(selection != null) {
         	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>)selection);
-        	
         	mav.addObject("selection", list);
         }
 		return mav;
