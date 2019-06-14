@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 		<link rel='stylesheet' href='/css/style.css' />
 		<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
@@ -12,7 +12,7 @@
 		<th:block th:fragment="photolist">
 			<div class='images'>
 				<th:block th:each="photo : ${catalog}">
-					<div class='img-box' th:style="'background:url(' + ${photo.image} + ');background-size: contain;background-position: center;background-repeat: no-repeat;'" th:onclick="'cartAdd(\'' + ${photo.id} + '\');'"></div>
+					<div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'" th:onclick="'cartAdd(\'' + ${photo.id} + '\');'"></div>
 				</th:block>
 			</div>
 		</th:block>
