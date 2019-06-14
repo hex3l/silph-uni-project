@@ -1,9 +1,12 @@
 package net.hex3l.silph.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import net.hex3l.silph.model.data.Photo;
 
-public interface PhotoRepository extends CrudRepository<Photo, Long> {
+public interface PhotoRepository extends PagingAndSortingRepository<Photo, Long> {
 	//Method that gets elements for each page - offsets
 }
+
+
+

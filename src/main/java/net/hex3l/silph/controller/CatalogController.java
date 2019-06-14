@@ -37,22 +37,36 @@ public class CatalogController{
 	public ModelAndView displayPhotos(@PathVariable("pageNumber") Integer pageNumber, HttpSession session) {
 		ModelAndView mav = new ModelAndView("catalog/photos");
 		//TODO: remove findAll() create new method in @PhotoRepository to extract pages
-        mav.addObject("catalog", photoRepository.findAll());
-        Object selection = session.getAttribute("photos");
+        //mav.addObject("catalog", photoRepository.findAll());
+        mav.addObject("catalog", photoService.photoPage(pageNumber));
+        /* Object selection = session.getAttribute("photos");
         if(selection != null) {
         	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>) selection);
         	
         	mav.addObject("selection", list);
         }
-		return mav;
+		return mav; */
+        return photoSelection(mav, session);
 	}
 	
 	@RequestMapping(value = "/catalog/photos", method = RequestMethod.GET)
 	public ModelAndView displayPhotos(HttpSession session) {
 		ModelAndView mav = new ModelAndView("catalog/photos");
 		//TODO: remove findAll() create new method in @PhotoRepository to extract pages
-        mav.addObject("catalog", photoRepository.findAll());
-        Object selection = session.getAttribute("photos");
+		  mav.addObject("catalog", photoService.photoPage(1));
+        //mav.addObject("catalog", photoRepository.findAll());
+        /* Object selection = session.getAttribute("photos");
+        if(selection != null) {
+        	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>)selection);
+        	
+        	mav.addObject("selection", list);
+        }
+		return mav; */
+		return photoSelection(mav, session);
+	}
+	
+	public ModelAndView photoSelection(ModelAndView mav, HttpSession session) {
+		Object selection = session.getAttribute("photos");
         if(selection != null) {
         	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>)selection);
         	
