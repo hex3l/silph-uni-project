@@ -36,26 +36,21 @@ public class CatalogController{
 	@RequestMapping(value = "/catalog/photos/{pageNumber}", method = RequestMethod.GET)
 	public ModelAndView displayPhotos(@PathVariable("pageNumber") Integer pageNumber, HttpSession session) {
 		ModelAndView mav = new ModelAndView("catalog/photos");
-		//TODO: remove findAll() create new method in @PhotoRepository to extract pages
-        mav.addObject("catalog", photoRepository.findAll());
-        Object selection = session.getAttribute("photos");
-        if(selection != null) {
-        	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>) selection);
-        	
-        	mav.addObject("selection", list);
-        }
-		return mav;
+        mav.addObject("catalog", photoService.photoPage(pageNumber));
+        return photoSelection(mav, session);
 	}
 	
 	@RequestMapping(value = "/catalog/photos", method = RequestMethod.GET)
 	public ModelAndView displayPhotos(HttpSession session) {
 		ModelAndView mav = new ModelAndView("catalog/photos");
-		//TODO: remove findAll() create new method in @PhotoRepository to extract pages
-        mav.addObject("catalog", photoRepository.findAll());
-        Object selection = session.getAttribute("photos");
+		mav.addObject("catalog", photoService.photoPage(0));
+		return photoSelection(mav, session);
+	}
+	
+	public ModelAndView photoSelection(ModelAndView mav, HttpSession session) {
+		Object selection = session.getAttribute("photos");
         if(selection != null) {
         	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>)selection);
-        	
         	mav.addObject("selection", list);
         }
 		return mav;
