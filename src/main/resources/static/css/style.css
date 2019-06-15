@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Federo&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap');
 
+body {
+	margin:0;
+}
+
 .header {
 	height:100px;
 	position:fixed;
@@ -15,6 +19,13 @@
 	width: fit-content;
 	font-size: 70px;
 	padding: 10px;
+	text-decoration: none;
+	color: black;
+}
+
+.title:hover {
+	color: #666666;
+	transition-duration: 0.5s;
 }
 
 .top-menu{
@@ -100,12 +111,12 @@ ul li ul:hover {
 	margin: auto;
 	max-width: 900px;
 	height: 100%;
-	height: -moz-available;          /* WebKit-based browsers will ignore this. */
-	height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+	height: -moz-available;
+	height: -webkit-fill-available;
 	height: fill-available;
 }
 
-.images {
+.center {
 	margin: auto;
 	max-width: 900px;
 	width: fit-content;
@@ -170,4 +181,9 @@ svg:hover {
 .over {
 	height:180px;	
 	overflow:auto;
+}
+
+h4 {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 1.6em;
 }

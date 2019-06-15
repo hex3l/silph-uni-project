@@ -12,6 +12,7 @@
 <body>
     <div th:replace="admin/fragments/header :: header"></div>
     <div class='content'>
+        <h4>Admin > Upload successful</h4>
         <table>
             <tr>
                 <td>Name: </td>
@@ -24,6 +25,9 @@
                         <div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'"></div>
                     </a>
                 </td>
+            <tr>
+                <td><a href="/admin/photo/new"><button>Upload a new photo</button></a></td>
+            </tr>
             </tr>
         </table>
     </div>

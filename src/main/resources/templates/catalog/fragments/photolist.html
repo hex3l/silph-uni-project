@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<th:block th:fragment="photolist">
-			<div class='images'>
+			<div class='center'>
 				<th:block th:each="photo : ${catalog}">
 					<div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'" th:onclick="'cartAdd(\'' + ${photo.id} + '\');'"></div>
 				</th:block>
