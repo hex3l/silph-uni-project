@@ -23,5 +23,6 @@ public class Photographer {
 	private String surname;
 	@Getter @Setter
 	@OneToMany(mappedBy="photographer")
-	private List<Album> albums;
+	private List<Photo> photos;
 }
+

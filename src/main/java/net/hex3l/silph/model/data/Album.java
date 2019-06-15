@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -21,10 +22,7 @@ public class Album {
 	@Getter @Setter
 	private String name;
 	@Getter @Setter
-	@OneToMany(mappedBy="album")
+	@ManyToMany(mappedBy="albums")
 	private List<Photo> photos;
-	@Getter @Setter
-	@ManyToOne
-	private Photographer photographer;
 
 }
