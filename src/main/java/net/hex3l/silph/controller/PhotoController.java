@@ -1,5 +1,6 @@
 package net.hex3l.silph.controller;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
@@ -21,34 +22,28 @@ public class PhotoController {
 	
 	@RequestMapping(value = "/photo/{imageid}.png", method = RequestMethod.GET, produces = "image/png")
 	public @ResponseBody byte[] displayPngImage(@PathVariable("imageid") Long photoId) {
-		String body = "<!doctype html><img src='" + retrieveImage(photoId) + "'>";
-		return body.getBytes();
-		
-		//return retrieveImage(photoId);
+		return retrieveImage(photoId);
 	}
 	
 	@RequestMapping(value = "/photo/{imageid}.jpeg", method = RequestMethod.GET, produces = "image/jpeg")
 	public @ResponseBody byte[] displayJpegImage(@PathVariable("imageid") Long photoId) {
-		String body = "<!doctype html><img src='" + retrieveImage(photoId) + "'>";
-		return body.getBytes();
-		
-		//return retrieveImage(photoId);
+		return retrieveImage(photoId);
 	}
 	
-	private String retrieveImage(Long photoId) {
-		String data = "";
-		//ByteArrayOutputStream bao = new ByteArrayOutputStream();
+	private byte[] retrieveImage(Long photoId) {
+		ByteArrayOutputStream bao = new ByteArrayOutputStream();
 		
 		Optional<Photo> opt = photoRepository.findById(photoId);
 		if(opt.isPresent()) {
 			Photo photo = opt.get();
-			data = photo.getImage();
-			//bao.write(photo.getImage(););
+			try{
+				bao.write(photo.getImage());
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
-		return data;
-		
-		//return bao.toByteArray();
+
+		return bao.toByteArray();
 	}
 
 }

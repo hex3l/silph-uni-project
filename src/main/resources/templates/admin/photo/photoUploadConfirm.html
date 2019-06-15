@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel='stylesheet' href='/css/style.css' />
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+            integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <div th:replace="admin/fragments/header :: header"></div>
+    <div class='content'>
+        <h4>Admin > Upload successful</h4>
+        <table>
+            <tr>
+                <td>Name: </td>
+                <td th:text="${photo.name}"></td>
+            </tr>
+            <tr>
+                <td>Image: </td>
+                <td>
+                    <a th:href="'/photo/' + ${photo.id} + '.' + ${photo.extension}">
+                        <div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'"></div>
+                    </a>
+                </td>
+            <tr>
+                <td><a href="/admin/photo/new"><button>Upload a new photo</button></a></td>
+            </tr>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
