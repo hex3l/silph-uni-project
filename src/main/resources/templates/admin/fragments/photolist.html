@@ -19,17 +19,17 @@
 				<table>
 					<tr>
 						<th:block th:if="(${page} - 2) >= 0">
-							<td><a th:href="@{/admin/album/photos/} + (${page} - 2)" th:text="${page} - 2"></a></td>
+							<td><a th:href="@{/admin/album/photos/} + (${page} - 2)" th:text="${page} - 1"></a></td>
 						</th:block>
 						<th:block th:if="(${page} - 1) >= 0">
-							<td><a th:href="@{/admin/album/photos/} + (${page} - 1)" th:text="${page} - 1"></a></td>
+							<td><a th:href="@{/admin/album/photos/} + (${page} - 1)" th:text="${page}"></a></td>
 						</th:block>
-						<td th:text="${page}"></td>
+						<td th:text="${page} + 1"></td>
 						<th:block  th:if="${page} + 1 < ${pages}">
-							<td><a th:href="@{/admin/album/photos/} + (${page} + 1)" th:text="${page} + 1"></a></td>
+							<td><a th:href="@{/admin/album/photos/} + (${page} + 1)" th:text="${page} + 2"></a></td>
 						</th:block>
 						<th:block th:if="${page} + 2 < ${pages}">
-							<td><a th:href="@{/admin/album/photos/} + (${page} + 2)" th:text="${page} + 2"></a></td>
+							<td><a th:href="@{/admin/album/photos/} + (${page} + 2)" th:text="${page} + 3"></a></td>
 						</th:block>
 					</tr>
 				</table>

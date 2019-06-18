@@ -11,8 +11,8 @@
 	<body>
 		<div th:replace="fragments/header :: header"></div>
 			<div class='content'>
-				<h4>Photos</h4>
-				<div th:replace="catalog/fragments/photolist :: photolist"></div>
+				<h4 th:text="'Photographer > ' + ${photographer.name} + ' ' + ${photographer.surname}"></h4>
+				<div th:replace="catalog/fragments/photographer/photographerlist :: photolist"></div>
 			</div>
 		<div th:replace="fragments/cart :: cart"></div>
 	</body>

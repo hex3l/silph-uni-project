@@ -10,10 +10,13 @@
 	</head>
 	<body>
 		<div th:replace="fragments/header :: header"></div>
-			<div class='content'>
-				<h4>Photos</h4>
-				<div th:replace="catalog/fragments/photolist :: photolist"></div>
-			</div>
-		<div th:replace="fragments/cart :: cart"></div>
+		<div class='content'>
+			<h4>Photographers</h4>
+			<table>
+				<tr th:each="photographer : ${photographers}">
+					<td><a th:href="@{/catalog/photographer/} + ${photographer.id}" th:text="${photographer.name} + ' ' + ${photographer.surname}"></a></td>
+				</tr>
+			</table>
+		</div>
 	</body>
 </html>

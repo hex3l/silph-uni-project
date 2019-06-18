@@ -31,6 +31,6 @@ public class PhotoService {
 	}
 	
 	public Page<Photo> photoPage(int page) {
-		return photoRepository.findAll(PageRequest.of(page, 4));
+		return photoRepository.findAll(PageRequest.of(page, 9));
 	}
 }

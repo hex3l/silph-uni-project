@@ -125,27 +125,48 @@ ul li ul:hover {
 	display: flow-root;
 }
 
+.album {
+	width: 290px;
+	float: left;
+	color:#000;
+	text-decoration: none;
+}
+
+.album:hover {
+	color:#666;
+}
+
 .img-box {
 	width: 290px;
 	height: 170px;
 	float: left;
-	background-color: #000;
 	margin-left: 5px;
 	margin-right:5px;
 	margin-bottom: 10px;
-	background-position: center;
-	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .img-box:hover {
 	cursor: pointer;
 }
 
+.img-box .album {
+	justify-content:center;
+	font-size: 2em;
+	bottom: 0;
+}
+
+.album .albumtitle {
+	font-size: 2em;
+	text-align: center;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
 .cart {
 	position:fixed;
 	width: 500px;
-	right:0px;
-	bottom:0px;
+	right:0;
+	bottom:0;
 	height: fit-content;
 }
 
@@ -153,7 +174,6 @@ ul li ul:hover {
 	border-left:solid 1px #000;
 	border-top:solid 1px #000;
 	border-bottom: solid 1px #000;
-	border-radius: 20px 0 0 0;	
 	background-color: #000;
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 30px;
@@ -199,7 +219,6 @@ h4 {
 	margin-top: 20px;
 	text-align: center;
 	border: 1px solid #000;
-	border-radius: 10px;
 	text-decoration: none;
 	color: #000;
 }

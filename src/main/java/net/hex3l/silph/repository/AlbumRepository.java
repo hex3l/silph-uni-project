@@ -1,9 +1,8 @@
 package net.hex3l.silph.repository;
 
-import org.springframework.data.repository.CrudRepository;
-
 import net.hex3l.silph.model.data.Album;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface AlbumRepository extends CrudRepository<Album, Long> {
+public interface AlbumRepository extends PagingAndSortingRepository<Album, Long> {
 	
 }
