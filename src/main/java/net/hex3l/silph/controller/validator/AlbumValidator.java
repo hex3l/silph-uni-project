@@ -16,7 +16,11 @@ public class AlbumValidator implements Validator {
 	
 	@Override
 	public void validate(Object target, Errors errors) {
-		//Validate album and image as numbers and imageext as png/jpeg
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "required");
+		Album album = (Album) target;
+		if(album.getPhotos().isEmpty()) {
+			errors.rejectValue("photos", "required");
+		}
 	}
 
 }

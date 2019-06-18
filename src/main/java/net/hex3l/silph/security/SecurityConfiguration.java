@@ -40,6 +40,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .logout()
         .logoutUrl("/perform_logout")
         .deleteCookies("JSESSIONID");
+		
+		http.headers().frameOptions().sameOrigin();
         
 	}
 	
