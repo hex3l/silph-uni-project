@@ -121,6 +121,7 @@ ul li ul:hover {
 	max-width: 900px;
 	width: fit-content;
 	height: fit-content;
+	display: flow-root;
 }
 
 .img-box {
