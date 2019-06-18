@@ -25,4 +25,8 @@ public class PhotographerService {
 		return (List<Photographer>) photographerRepository.findAll();
 	}
 
+	@Transactional 
+	public Photographer findById(Long id) {
+		return photographerRepository.findById(id).get();
+	}
 }

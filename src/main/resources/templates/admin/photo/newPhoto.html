@@ -20,6 +20,16 @@
                     <td><input type="file" name="image"></td>
                 </tr>
                 <tr>
+                    <td>Photographer: </td>
+                    <td>
+                    	<select name="photographer">
+                    		<th:block th:each="photographer : ${photographers}">
+ 								<option th:value="${photographer.id}" th:text="${photographer.name}+ ' ' + ${photographer.surname}"></option>
+                    		</th:block>
+                    	</select>
+                    </td>
+                </tr>
+                <tr>
                     <td><button type="submit">Upload</button></td>
                 </tr>
             </table>

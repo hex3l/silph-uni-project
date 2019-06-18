@@ -26,6 +26,7 @@ public class Photo {
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] image;
+	@Getter @Setter
 	@ManyToOne
 	private Photographer photographer;
 }

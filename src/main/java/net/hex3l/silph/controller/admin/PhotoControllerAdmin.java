@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import net.hex3l.silph.controller.validator.PhotoValidator;
 import net.hex3l.silph.model.data.Photo;
+import net.hex3l.silph.model.data.Photographer;
 import net.hex3l.silph.services.PhotoService;
+import net.hex3l.silph.services.PhotographerService;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,17 +28,22 @@ public class PhotoControllerAdmin {
 	
 	@Autowired
 	private PhotoValidator photoValidator;
-
+	
+	@Autowired
+	private PhotographerService photographerService;
 	
 	@RequestMapping(value="/admin/photo/new",method= RequestMethod.POST)
 	public String newPhoto(@Valid @RequestParam("image") MultipartFile[] image,
+			@Valid @RequestParam("photographer") Long id,
 			Model model) {
 		Photo photo = new Photo();
+		Photographer photographer = photographerService.findById(id);
 		try {
-			if(image[0].getContentType().contains("image/")) {
+			if(image[0].getContentType().contains("image/") && photographer != null) {
 				photo.setName(image[0].getOriginalFilename());
 				photo.setImage(image[0].getBytes());
 				photo.setExtension(image[0].getContentType().replace("image/", ""));
+				photo.setPhotographer(photographer);
 
 				BindingResult bindingResult = new BindException(photo, "Photo");
 				this.photoValidator.validate(photo, bindingResult);
@@ -54,7 +62,8 @@ public class PhotoControllerAdmin {
 	}
 
 	@RequestMapping(value="/admin/photo/new",method= RequestMethod.GET)
-	public String newPhoto() {
+	public String newPhoto(Model model) {
+		model.addAttribute("photographers", photographerService.tutte());
 		return "admin/photo/newPhoto";
 	}
 
