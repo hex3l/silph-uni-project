@@ -24,16 +24,22 @@ public class PhotographerControllerAdmin {
 
 	
 	@RequestMapping(value="/admin/photographer/new",method= RequestMethod.POST)
-	public String newPhotographer(@Valid @ModelAttribute("Photographer") Photographer photographer, 
+	public String createPhotographer(@Valid @ModelAttribute("Photographer") Photographer photographer, 
 			Model model, BindingResult bindingResult) {
 		this.photographerValidator.validate(photographer, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.photographerService.inserisci(photographer);
-			return "/photographer";
+			model.addAttribute(photographer);
+			return "admin/photographer/photographerConfirm";
+		} else {
+			return "admin/photographer/newPhotographer";
 		}
-		else {
-			return "/photographer";
-		}
+	}
+	
+	@RequestMapping(value="/admin/photographer/new",method= RequestMethod.GET)
+	public String newPhotographer(Model model) {
+		model.addAttribute("photographer", new Photographer());
+		return "admin/photographer/newPhotographer";
 	}
 
 }
