@@ -111,9 +111,6 @@ ul li ul:hover {
 	margin: auto;
 	max-width: 900px;
 	height: 100%;
-	height: -moz-available;
-	height: -webkit-fill-available;
-	height: fill-available;
 }
 
 .center {
@@ -136,7 +133,7 @@ ul li ul:hover {
 	background-repeat: no-repeat;
 }
 
-.img-box {
+.img-box:hover {
 	cursor: pointer;
 }
 
@@ -210,11 +207,12 @@ h4 {
 
 .homebutton .name {
 	font-size: 1.8em;
-	width:100%;	
+	width:100%;
+	font-family: 'Open Sans Condensed', sans-serif;
 	margin-bottom: 10px;
 }
 
-.homebutton .icon{
+.homebutton .icon {
 	font-size: 3.5em;
 	width:100%;
 	margin-top: 20px;
