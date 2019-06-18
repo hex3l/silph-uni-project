@@ -19,7 +19,7 @@ public class Album {
 	@Getter @Setter
 	private String name;
 	@Getter @Setter
-	@ManyToMany(mappedBy="albums")
+	@ManyToMany
 	private List<Photo> photos;
 
 }
