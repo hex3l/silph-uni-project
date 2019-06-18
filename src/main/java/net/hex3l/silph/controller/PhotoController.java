@@ -42,7 +42,11 @@ public class PhotoController {
 				e.printStackTrace();
 			}
 		}
-
+		try {
+			bao.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return bao.toByteArray();
 	}
 
