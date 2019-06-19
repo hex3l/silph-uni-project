@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import net.hex3l.silph.model.data.Photo;
 import net.hex3l.silph.repository.PhotoRepository;
 
+@SuppressWarnings("unchecked")
 @Controller
 public class CartController {
 	

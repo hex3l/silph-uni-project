@@ -17,10 +17,11 @@ public class CartService {
 	@Autowired
 	private PhotoService photoService;
 
+	@SuppressWarnings("unchecked")
 	public ModelAndView photoSelection(ModelAndView mav, HttpSession session) {
 		Object selection = session.getAttribute("photos");
         if(selection != null) {
-        	List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>)selection);
+			List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>)selection);
         	mav.addObject("selection", list);
         }
 		return mav;

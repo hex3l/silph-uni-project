@@ -14,25 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.hex3l.silph.model.data.Photo;
-import net.hex3l.silph.repository.AlbumRepository;
-import net.hex3l.silph.repository.PhotoRepository;
-import net.hex3l.silph.repository.PhotographerRepository;
 import net.hex3l.silph.services.PhotoService;
 
 @Controller
 public class AdminAlbumCatalogController{
 	
 	@Autowired
-	private PhotoRepository photoRepository;
-	
-	@Autowired
 	private PhotoService photoService;
-	
-	@Autowired
-	private AlbumRepository albumRepository;
-	
-	@Autowired
-	private PhotographerRepository photographerRepository;
 	
 	@RequestMapping(value = "/admin/album/photos/{pageNumber}", method = RequestMethod.GET)
 	public ModelAndView displayPhotos(@PathVariable("pageNumber") Integer pageNumber, HttpSession session) {
@@ -55,7 +43,8 @@ public class AdminAlbumCatalogController{
         mav.addObject("pages", page.getTotalPages());
 		return mav;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public ModelAndView photoSelection(ModelAndView mav, HttpSession session) {
 		Object selection = session.getAttribute("albumSelection");
         if(selection != null) {
