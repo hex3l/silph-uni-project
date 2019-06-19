@@ -242,7 +242,8 @@ h4 {
 	margin-bottom: 10px;
 }
 
-iframe {
+.iframe-album {
 	border-width: 0;
+	width: 100%; 
     height: calc(100% - 257px);
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<link rel='stylesheet' href='/css/style.css' />
+<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+            integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+<meta charset="ISO-8859-1">
+<title>Usage Requests</title>
+</head>
+<body>
+	 <div th:replace="admin/fragments/header :: header"></div>
+    <div class='content'>
+    <h4>Requests</h4>
+    <table>
+    	<tr>
+    	<th>Firstname</th><th>Lastname</th><th>Mail</th>
+    	</tr>
+    	<tr th:each="request : ${requests}">
+    	<td th:text="${request.customer.firstName}"/>
+    	<td th:text="${request.customer.lastName}"/>
+    	<td th:text="${request.customer.mail}"/>
+    	<td><a th:href="@{'/admin'+'/request'+'/'+${request.id}}"><i class="fas fa-eye"></i></a></td>
+    	</tr> 
+    </table>
+    </div>
+
+</body>
+</html>
