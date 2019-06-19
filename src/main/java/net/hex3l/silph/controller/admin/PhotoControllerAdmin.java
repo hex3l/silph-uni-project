@@ -51,14 +51,12 @@ public class PhotoControllerAdmin {
 					this.photoService.add(photo);
 					model.addAttribute("photo", photo);
 					return "admin/photo/photoUploadConfirm";
-				} else {
-					return "error";
 				}
 			}
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		return "error";
+		return "admin/photo/newPhoto";
 	}
 
 	@RequestMapping(value="/admin/photo/new",method= RequestMethod.GET)
