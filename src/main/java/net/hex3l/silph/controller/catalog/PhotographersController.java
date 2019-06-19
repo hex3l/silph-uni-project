@@ -27,10 +27,10 @@ public class PhotographersController {
 	private PhotographerService photographerService;
 
 	@RequestMapping(value = "/catalog/photographers", method = RequestMethod.GET)
-	public ModelAndView displayAlbums() {
+	public ModelAndView displayAlbums(HttpSession session) {
 		ModelAndView mav = new ModelAndView("catalog/photographers");
 		mav.addObject("photographers", photographerService.tutte());
-		return mav;
+		return cartService.photoSelection(mav, session);
 	}
 
 	@RequestMapping(value = "/catalog/photographer/{photographerId}/{pageNumber}", method = RequestMethod.GET)

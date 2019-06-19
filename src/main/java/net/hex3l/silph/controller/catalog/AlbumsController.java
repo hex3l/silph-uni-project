@@ -27,17 +27,17 @@ public class AlbumsController {
 	private CartService cartService;
 
 	@RequestMapping(value = "/catalog/albums/{pageNumber}", method = RequestMethod.GET)
-	public ModelAndView displayAlbums(@PathVariable("pageNumber") Integer pageNumber) {
+	public ModelAndView displayAlbums(@PathVariable("pageNumber") Integer pageNumber, HttpSession session) {
 		ModelAndView mav = new ModelAndView("catalog/albums");
 		
-		return getAlbumsPage(mav, pageNumber);
+		return getAlbumsPage(cartService.photoSelection(mav, session), pageNumber);
 	}
 
 	@RequestMapping(value = "/catalog/albums", method = RequestMethod.GET)
-	public ModelAndView displayAlbums() {
+	public ModelAndView displayAlbums(HttpSession session) {
 		ModelAndView mav = new ModelAndView("catalog/albums");
 
-		return getAlbumsPage(mav,0);
+		return getAlbumsPage(cartService.photoSelection(mav, session),0);
 	}
 
 	@RequestMapping(value = "/catalog/album/{albumId}/{pageNumber}", method = RequestMethod.GET)
