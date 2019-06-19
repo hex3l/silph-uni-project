@@ -3,7 +3,7 @@ package net.hex3l.silph.controller.catalog;
 import net.hex3l.silph.model.data.Album;
 import net.hex3l.silph.model.data.Photo;
 import net.hex3l.silph.services.AlbumService;
-import net.hex3l.silph.services.PhotoService;
+import net.hex3l.silph.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -16,16 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class AlbumsController {
 
 	@Autowired
 	private AlbumService albumService;
-
+	
 	@Autowired
-	private PhotoService photoService;
+	private CartService cartService;
 
 	@RequestMapping(value = "/catalog/albums/{pageNumber}", method = RequestMethod.GET)
 	public ModelAndView displayAlbums(@PathVariable("pageNumber") Integer pageNumber) {
@@ -45,14 +44,14 @@ public class AlbumsController {
 	public ModelAndView displayAlbum(@PathVariable("albumId") Long albumId, @PathVariable("pageNumber") Integer pageNumber, HttpSession httpSession) {
 		ModelAndView mav = new ModelAndView("catalog/album");
 
-		return getAlbumPage(photoSelection(mav, httpSession), albumService.findById(albumId), pageNumber);
+		return getAlbumPage(cartService.photoSelection(mav, httpSession), albumService.findById(albumId), pageNumber);
 	}
 
 	@RequestMapping(value = "/catalog/album/{albumId}", method = RequestMethod.GET)
 	public ModelAndView displayAlbum(@PathVariable("albumId") Long albumId, HttpSession httpSession) {
 		ModelAndView mav = new ModelAndView("catalog/album");
 
-		return getAlbumPage(photoSelection(mav, httpSession), albumService.findById(albumId), 0);
+		return getAlbumPage(cartService.photoSelection(mav, httpSession), albumService.findById(albumId), 0);
 	}
 
 	ModelAndView getAlbumPage(ModelAndView mav, Album album, Integer pageNumber) {
@@ -70,15 +69,6 @@ public class AlbumsController {
 		mav.addObject("catalog", page.getContent());
 		mav.addObject("page", page.getNumber());
 		mav.addObject("pages", page.getTotalPages());
-		return mav;
-	}
-
-	ModelAndView photoSelection(ModelAndView mav, HttpSession session) {
-		Object selection = session.getAttribute("photos");
-		if(selection != null) {
-			List<Photo> list = (List<Photo>) photoService.findAllById((Set<Long>)selection);
-			mav.addObject("selection", list);
-		}
 		return mav;
 	}
 }
