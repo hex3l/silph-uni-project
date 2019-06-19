@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -37,8 +38,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .defaultSuccessUrl("/admin", true)
         .failureUrl("/login?error=true")
         .and()
-        .logout()
-        .logoutUrl("/perform_logout")
+        //.logout()
+        //.logoutSuccessUrl("/")
+        //.logoutUrl("/")
+        //.logoutUrl("/perform_logout")
+        //.deleteCookies("JSESSIONID");
+        //.logout()
+        //.logoutUrl("/perform_logout")
+        //.invalidateHttpSession(true)
+        //.deleteCookies("JSESSIONID");
+        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
         .deleteCookies("JSESSIONID");
 		
 		http.headers().frameOptions().sameOrigin();
