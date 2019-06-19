@@ -51,8 +51,8 @@ public class RequestForm {
 		request.setPhotos(photos);
 		request.setCustomer(customer);
 		if(!bindingResult.hasErrors()) {
-			this.usageRequestService.add(request);
 			this.customerService.add(customer);
+			this.usageRequestService.add(request);
 			model.addAttribute(request);
 			return "requests/requestConfirm";
 		} else {

@@ -12,6 +12,7 @@
 <title>Request form</title>
 </head>
 <body>
+	<div th:replace="fragments/header :: header"></div>
 	<div class='content'>
 	<h4>New usage request</h4>
 	<form th:action="@{/request}" method="POST" th:object="${customer}" >
