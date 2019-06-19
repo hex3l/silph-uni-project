@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<link rel='stylesheet' href='/css/style.css' />
+<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+            integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+<meta charset="ISO-8859-1">
+<title>Request form</title>
+</head>
+<body>
+	<div class='content'>
+	<h4>New usage request</h4>
+	<form th:action="@{/request}" method="POST" th:object="${customer}" >
+		<table>
+			<tr>
+				<td>Firstname:</td>
+				<td><input type="text" th:field="*{firstName}"/></td>
+			</tr>
+			<tr>
+				<td>Lastname:</td>
+				<td><input type="text" th:field="*{lastName}"/></td>
+			</tr>
+			<tr>
+				<td>Mail:</td>
+				<td><input type="text" th:field="*{mail}"/></td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">Confirm</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<div th:replace="fragments/cart :: cart"></div>
+	</div>
+</body>
+</html>
