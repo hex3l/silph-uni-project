@@ -14,9 +14,10 @@
 <body>
 	 <div th:replace="admin/fragments/header :: header"></div>
     <div class='content'>
+    <h4>Requests</h4>
     <table>
     	<tr th:each="request : ${requests}">
-    	<td><a th:href="@{'/request'+'/'+${request.id}}" th:text="${request.customer.firstName}+ ' ' + ${request.customer.lastName}+ ' ' + ${request.customer.mail}"></a></td>
+    	<td><a th:href="@{'/admin'+'/request'+'/'+${request.id}}" th:text="${request.customer.firstName}+ ' ' + ${request.customer.lastName}+ ' ' + ${request.customer.mail}"></a></td>
     	</tr> 
     </table>
     </div>

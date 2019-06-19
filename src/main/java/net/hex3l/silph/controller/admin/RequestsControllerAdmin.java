@@ -23,7 +23,7 @@ public class RequestsControllerAdmin {
 		return mav;
 	}
 	
-	@RequestMapping(value= "/admin/requests/{id}",method = RequestMethod.GET)
+	@RequestMapping(value= "/admin/request/{id}",method = RequestMethod.GET)
 	public String getUsageRequest(@PathVariable ("id") Long id, Model model) {
 		if(id!=null) {
 			model.addAttribute("request", this.usageRequestService.findById(id));
