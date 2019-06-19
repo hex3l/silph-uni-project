@@ -5,9 +5,7 @@ import net.hex3l.silph.model.data.Photographer;
 import net.hex3l.silph.services.CartService;
 import net.hex3l.silph.services.PhotographerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,11 +48,13 @@ public class PhotographersController {
 
 	ModelAndView getPhotographerPage(ModelAndView mav, Photographer photographer, Integer pageNumber) {
 		List<Photo> photos = photographer.getPhotos();
-		Page<Photo> page = new PageImpl<>(photos, PageRequest.of(pageNumber, 6), photos.size());
+		PagedListHolder<Photo> page = new PagedListHolder<>(photos);
+		page.setPageSize(9);
+		page.setPage(pageNumber);
 		mav.addObject("photographer", photographer);
-		mav.addObject("catalog", page.getContent());
-		mav.addObject("page", page.getNumber());
-		mav.addObject("pages", page.getTotalPages());
+		mav.addObject("catalog", page.getPageList());
+		mav.addObject("page", page.getPage());
+		mav.addObject("pages", page.getPageCount());
 		return mav;
 	}
 }

@@ -5,9 +5,8 @@ import net.hex3l.silph.model.data.Photo;
 import net.hex3l.silph.services.AlbumService;
 import net.hex3l.silph.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,11 +55,13 @@ public class AlbumsController {
 
 	ModelAndView getAlbumPage(ModelAndView mav, Album album, Integer pageNumber) {
 		List<Photo> photos = album.getPhotos();
-		Page<Photo> page = new PageImpl<>(photos, PageRequest.of(pageNumber, 9), photos.size());
+		PagedListHolder<Photo> page = new PagedListHolder<>(photos);
+		page.setPageSize(9);
+		page.setPage(pageNumber);
 		mav.addObject("album", album);
-		mav.addObject("catalog", page.getContent());
-		mav.addObject("page", page.getNumber());
-		mav.addObject("pages", page.getTotalPages());
+		mav.addObject("catalog", page.getPageList());
+		mav.addObject("page", page.getPage());
+		mav.addObject("pages", page.getPageCount());
 		return mav;
 	}
 
