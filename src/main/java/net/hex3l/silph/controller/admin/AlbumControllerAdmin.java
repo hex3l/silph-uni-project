@@ -32,7 +32,8 @@ public class AlbumControllerAdmin {
 	
 	@Autowired
 	private AlbumValidator albumValidator;
-	
+
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/admin/album/new",method= RequestMethod.POST)
 	public String createAlbum(@Valid @ModelAttribute("album") Album album, 
 			Model model, HttpSession session) {
