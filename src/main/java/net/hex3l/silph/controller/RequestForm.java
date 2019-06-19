@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.hex3l.silph.controller.validator.CustomerValidator;
 import net.hex3l.silph.controller.validator.UsageRequestValidator;
 import net.hex3l.silph.model.Customer;
 import net.hex3l.silph.model.UsageRequest;
@@ -33,6 +34,9 @@ public class RequestForm {
 	@Autowired
 	private UsageRequestValidator usageRequestValidator;
 	
+	@Autowired 
+	private CustomerValidator customerValidator;
+	
 	@Autowired
 	private CustomerService customerService;
 	
@@ -45,15 +49,16 @@ public class RequestForm {
 	@RequestMapping(value="/request",method= RequestMethod.POST)
 	public String newRequest(@Valid @ModelAttribute("customer") Customer customer, 
 			Model model, BindingResult bindingResult, HttpSession session) {
-		//this.customerValidator.validate(customer, bindingResult);
+		this.customerValidator.validate(customer, bindingResult);
 		UsageRequest request = new UsageRequest();
 		List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)session.getAttribute("photos"));
 		request.setPhotos(photos);
 		request.setCustomer(customer);
+		this.usageRequestValidator.validate(request, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.customerService.add(customer);
 			this.usageRequestService.add(request);
-			model.addAttribute(request);
+			model.addAttribute("request", request);
 			return "requests/requestConfirm";
 		} else {
 			return "requests/requestForm";
