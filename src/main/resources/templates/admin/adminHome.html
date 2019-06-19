@@ -14,6 +14,36 @@
 </head>
 <body>
 	<div th:replace="admin/fragments/header :: header"></div>
-
+	<div class="content">
+		<h4>Data</h4>
+		<a href="/">
+			<div class="homebutton">
+				<div class="icon"><i class="fas fa-list-alt"></i></div>
+				<div class="name">Catalog</div>
+			</div>
+		</a>
+		</br>
+	</div>
+	<div class="content">
+	    <h4>Admin actions</h4>
+		<a href="/admin/photographer/new">
+			<div class="homebutton">
+				<div class="icon"><i class="fas fa-camera"></i></div>
+				<div class="name">New Photographer</div>
+			</div>
+		</a>
+		<a href="/admin/photo/new">
+			<div class="homebutton">
+				<div class="icon"><i class="fas fa-file-image"></i></div>
+				<div class="name">Upload Photo</div>
+			</div>
+		</a>
+		<a href="/admin/album/new">
+			<div class="homebutton">
+				<div class="icon"><i class="fas fa-images"></i></div>
+				<div class="name">Create Album</div>
+			</div>
+		</a>
+	</div>
 </body>
 </html>
