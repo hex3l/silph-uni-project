@@ -10,6 +10,7 @@
 	</head>
 	<body>
 		<div th:replace="fragments/header :: header"></div>
+		<div th:replace="catalog/fragments/catalogs :: catalogs"></div>
 			<div class='content'>
 				<h4 th:text="'Album > ' + ${album.name}"></h4>
 				<div  th:replace="catalog/fragments/album/albumlist :: photolist"></div>

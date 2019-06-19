@@ -9,12 +9,17 @@
 		crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<div th:replace="fragments/header :: header"></div>
-		<div th:replace="catalog/fragments/catalogs :: catalogs"></div>
-			<div class='content'>
-				<h4 th:text="'Photographer > ' + ${photographer.name} + ' ' + ${photographer.surname}"></h4>
-				<div th:replace="catalog/fragments/photographer/photographerlist :: photolist"></div>
+		<th:block th:fragment="catalogs">
+			<div class='content' style="margin-top:40px;">
+				<table style="float:right;">
+					<tr>
+						<td>View: </td>
+						<td><a href="/catalog/photos">Photos</a> </td>
+						<td><a href="/catalog/albums">Albums</a> </td>
+						<td><a href="/catalog/photographers">Photographers</a> </td>
+					</tr>
+				</table>
 			</div>
-		<div th:replace="fragments/cart :: cart"></div>
+		</th:block>
 	</body>
 </html>
