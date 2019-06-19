@@ -28,7 +28,7 @@ public class PhotographerControllerAdmin {
 			Model model, BindingResult bindingResult) {
 		this.photographerValidator.validate(photographer, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			this.photographerService.inserisci(photographer);
+			this.photographerService.add(photographer);
 			model.addAttribute(photographer);
 			return "admin/photographer/photographerConfirm";
 		} else {

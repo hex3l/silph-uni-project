@@ -18,11 +18,11 @@ public class AlbumService {
 	private AlbumRepository albumRepository;
 	
 	@Transactional
-	public Album inserisci(Album album) {
+	public Album add(Album album) {
 		return this.albumRepository.save(album);
 	}
 
-	public List<Album> tutte() {
+	public List<Album> all() {
 		return (List<Album>) albumRepository.findAll();
 	}
 

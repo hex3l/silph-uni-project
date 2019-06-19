@@ -16,16 +16,14 @@ public class PhotographerService {
 	private PhotographerRepository photographerRepository;
 	
 	@Transactional
-	public Photographer inserisci(Photographer photographer) {
+	public Photographer add(Photographer photographer) {
 		return this.photographerRepository.save(photographer);
 	}
 	
-	@Transactional 
-	public List<Photographer> tutte() {
+	public List<Photographer> all() {
 		return (List<Photographer>) photographerRepository.findAll();
 	}
 
-	@Transactional 
 	public Photographer findById(Long id) {
 		return photographerRepository.findById(id).get();
 	}

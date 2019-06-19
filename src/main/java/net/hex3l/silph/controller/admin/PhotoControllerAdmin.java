@@ -48,7 +48,7 @@ public class PhotoControllerAdmin {
 				BindingResult bindingResult = new BindException(photo, "Photo");
 				this.photoValidator.validate(photo, bindingResult);
 				if (!bindingResult.hasErrors()) {
-					this.photoService.inserisci(photo);
+					this.photoService.add(photo);
 					model.addAttribute("photo", photo);
 					return "admin/photo/photoUploadConfirm";
 				} else {
@@ -63,7 +63,7 @@ public class PhotoControllerAdmin {
 
 	@RequestMapping(value="/admin/photo/new",method= RequestMethod.GET)
 	public String newPhoto(Model model) {
-		model.addAttribute("photographers", photographerService.tutte());
+		model.addAttribute("photographers", photographerService.all());
 		return "admin/photo/newPhoto";
 	}
 

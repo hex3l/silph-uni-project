@@ -41,7 +41,7 @@ public class AlbumControllerAdmin {
 		BindingResult bindingResult = new BindException(album, "Album");
 		this.albumValidator.validate(album, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			this.albumService.inserisci(album);
+			this.albumService.add(album);
 			model.addAttribute(album);
 			return "admin/album/albumConfirm";
 		} else {

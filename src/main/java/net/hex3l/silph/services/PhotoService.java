@@ -18,7 +18,7 @@ public class PhotoService {
 	private PhotoRepository photoRepository;
 	
 	@Transactional
-	public Photo inserisci(Photo photo) {
+	public Photo add(Photo photo) {
 		return this.photoRepository.save(photo);
 	}
 	
@@ -26,7 +26,7 @@ public class PhotoService {
 		return this.photoRepository.findAllById(ids);
 	}
 	
-	public List<Photo> tutte() {
+	public List<Photo> all() {
 		return (List<Photo>) photoRepository.findAll();
 	}
 	
