@@ -32,7 +32,8 @@
                   <td th:text="${request.customer.mail}"></td>
                 </tr>
             	</table>
-    <div th:text="Photos:"></div> 
+            	<br>
+    <div>Photos:</div> 
 	<th:block th:each="photo : ${request.photos}">
 	<div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'"></div>
      </th:block>
