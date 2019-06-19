@@ -8,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<th:block th:fragment="header">
@@ -17,17 +18,17 @@
 				<div class='top-menu'>
 					<div class='menu'>
 						<ul>
-							<li class='standard' id='nav-gallery'>
-								<a href='#'>
-									<i class="fas fa-list-alt"></i> GALLERY
+							<li>
+								<a href='/catalog'>
+									<i class="fas fa-list-alt"></i> CATALOG
 								</a>
 							</li>
-							<li id='nav-usage'>
+							<li >
 								<a href='/newRequest'>
 									<i class='fas fa-envelope'></i> REQUEST USAGE
 								</a>
 							</li>
-							<li id='nav-admin' style='float:right;'>
+							<li style='float:right;'>
 								<a href="/admin">
 									<i class='fas fa-user-shield'></i> ADMIN
 								</a>
@@ -37,6 +38,7 @@
 				</div>
 			</div>		
 		</div>
+		<script src="/js/menu.js"></script>
 		<div class='h100px'></div>
 	</th:block>
 </body>

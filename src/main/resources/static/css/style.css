@@ -28,7 +28,7 @@ body {
 }
 
 .logo:hover {
-	color: #666666;
+	color: #39a7af;
 	transition-duration: 0.5s;
 }
 
@@ -61,7 +61,6 @@ body {
     color: #000;
     display: block;
     float: left;
-    padding: 1rem;
     position: relative;
     text-decoration: none;
 }
@@ -69,6 +68,8 @@ body {
 .menu li a {
     color: #000;
     transition-duration: 0.5s;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
 .menu li:hover {
@@ -80,7 +81,7 @@ body {
 }
 
 .menu a:hover {
-	color: #666666;
+	color: #39a7af;
 }
 
 .menu ul li ul {
@@ -105,6 +106,10 @@ ul li ul:hover {
 
 .menu li ul li {
     width: calc(33% - (16px + 16px));;
+}
+
+.menu .active {
+	background-color: bisque;
 }
 
 .h100px {
@@ -224,7 +229,8 @@ h4 {
 }
 
 .homebutton:hover {
-	background-color: #eee;
+	color: #39a7af;
+	border-color: #39a7af;
     transition-duration: 0.5s;
 }
 

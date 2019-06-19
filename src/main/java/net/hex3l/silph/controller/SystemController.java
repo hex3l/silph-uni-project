@@ -17,9 +17,14 @@ public class SystemController{
 	private CartService cartService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView displayPhotos(HttpSession session) {
+	public String showIndex() {
+		return "redirect:catalog";
+	}
+
+	@RequestMapping(value = "/catalog", method = RequestMethod.GET)
+	public ModelAndView showCatalog(HttpSession session) {
 		ModelAndView mav = new ModelAndView("index");
-		
+
 		return cartService.photoSelection(mav, session);
 	}
 }
