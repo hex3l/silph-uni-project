@@ -16,8 +16,14 @@
     <div class='content'>
     <h4>Requests</h4>
     <table>
+    	<tr>
+    	<th>Firstname</th><th>Lastname</th><th>Mail</th>
+    	</tr>
     	<tr th:each="request : ${requests}">
-    	<td><a th:href="@{'/admin'+'/request'+'/'+${request.id}}" th:text="${request.customer.firstName}+ ' ' + ${request.customer.lastName}+ ' ' + ${request.customer.mail}"></a></td>
+    	<td th:text="${request.customer.firstName}"/>
+    	<td th:text="${request.customer.lastName}"/>
+    	<td th:text="${request.customer.mail}"/>
+    	<td><a th:href="@{'/admin'+'/request'+'/'+${request.id}}"><i class="fas fa-eye"></i></a></td>
     	</tr> 
     </table>
     </div>
