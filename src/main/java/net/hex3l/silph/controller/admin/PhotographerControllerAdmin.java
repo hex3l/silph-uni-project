@@ -24,7 +24,7 @@ public class PhotographerControllerAdmin {
 
 	
 	@RequestMapping(value="/admin/photographer/new",method= RequestMethod.POST)
-	public String createPhotographer(@Valid @ModelAttribute("Photographer") Photographer photographer, 
+	public String createPhotographer(@Valid @ModelAttribute("photographer") Photographer photographer, 
 			Model model, BindingResult bindingResult) {
 		this.photographerValidator.validate(photographer, bindingResult);
 		if(!bindingResult.hasErrors()) {
@@ -32,6 +32,7 @@ public class PhotographerControllerAdmin {
 			model.addAttribute(photographer);
 			return "admin/photographer/photographerConfirm";
 		} else {
+			model.addAttribute("photographer", new Photographer());
 			return "admin/photographer/newPhotographer";
 		}
 	}
