@@ -26,6 +26,8 @@
 						</div>
 					</a>
 				</div>
+				<div th:if="${imagelist_error != null}"><br><b>Wops seems like you haven't selected any photo!</b></div>
+				<div th:if="${google_error != null}"><br><b>Wops something went wrong... Try again!</b></div>
 			<br><br>
 			<b>OR</b>
 			<br><br>

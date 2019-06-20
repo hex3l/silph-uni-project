@@ -101,7 +101,15 @@ public class RequestForm {
 			}
 			customer.setUsageRequest(request);
 			
+			BindingResult usageRequestbindingResult = new BindException(request, "UsageRequest"); 
+			
+			this.usageRequestValidator.validate(request, usageRequestbindingResult);
+			if(usageRequestbindingResult.hasErrors()) {
+				model.addAttribute("imagelist_error", true);
+			}
+			
 			this.customerValidator.validate(customer, bindingResult);
+			model.addAttribute(bindingResult);
 			if(!bindingResult.hasErrors()) {
 				this.customerService.add(customer);
 				this.usageRequestService.add(request);
@@ -109,11 +117,14 @@ public class RequestForm {
 				
 				session.removeAttribute("photos");
 				return "requests/requestConfirm";
+			} else {
+				model.addAttribute("google_error", true);
 			}
 		}
 		if(principal instanceof OAuth2User) {
 			model.addAttribute("confirm", "/googleRequest");
 		} else {
+			model.addAttribute("google_error", true);
 			model.addAttribute("confirm", "/oauth2/authorization/google");
 		}
 		model.addAttribute("customer", new Customer());
