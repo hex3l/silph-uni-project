@@ -96,7 +96,7 @@ public class RequestForm {
 			request.setPhotos(photos);
 			request.setCustomer(customer);
 
-			BindingResult usageRequestBindingResult = new BindException(request, "Customer");
+			BindingResult usageRequestBindingResult = new BindException(request, "UsageRequest");
 			this.usageRequestValidator.validate(request, usageRequestBindingResult);
 
 			if(!customerBindingResult.hasErrors() && !usageRequestBindingResult.hasErrors()) {
