@@ -1,23 +1,14 @@
 package net.hex3l.silph.controller;
 
-import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -79,11 +70,11 @@ public class RequestForm {
 	}
 
 	@RequestMapping(value="/googleRequest",method= RequestMethod.GET)
-	public String newGoogleRequest( Model model, HttpSession session) {
+	public String newGoogleRequest(Model model, HttpSession session) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof OAuth2User) {
 			OAuth2User user = (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			UsageRequest request = new UsageRequest();
+
 			Customer customer = new Customer();
 			customer.setFirstName((String) user.getAttributes().get("given_name"));
 			customer.setFirstName((String) user.getAttributes().get("family_name"));
@@ -92,22 +83,27 @@ public class RequestForm {
 			BindingResult customerBindingResult = new BindException(customer, "Customer");
 			this.customerValidator.validate(customer, customerBindingResult);
 
-			List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)session.getAttribute("photos"));
-			request.setPhotos(photos);
-			request.setCustomer(customer);
+			UsageRequest request = new UsageRequest();
+			Object obj = session.getAttribute("photos");
+			if(obj != null) {
+				List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)obj);
+				request.setPhotos(photos);
+				request.setCustomer(customer);
 
-			BindingResult usageRequestBindingResult = new BindException(request, "UsageRequest");
-			this.usageRequestValidator.validate(request, usageRequestBindingResult);
+				BindingResult usageRequestBindingResult = new BindException(request, "UsageRequest");
+				this.usageRequestValidator.validate(request, usageRequestBindingResult);
 
-			if(!customerBindingResult.hasErrors() && !usageRequestBindingResult.hasErrors()) {
-				this.customerService.add(customer);
-				this.usageRequestService.add(request);
-				model.addAttribute("request", request);
-				session.removeAttribute("photos");
-				return "requests/requestConfirm";
+				if(!customerBindingResult.hasErrors() && !usageRequestBindingResult.hasErrors()) {
+					this.customerService.add(customer);
+					this.usageRequestService.add(request);
+					model.addAttribute("customer", customer);
+					model.addAttribute("request", request);
+					session.removeAttribute("photos");
+					return "requests/requestConfirm";
+				}
 			}
 		}
-
+		model.addAttribute("customer", new Customer());
 		return "requests/requestForm";
 	}
 	
