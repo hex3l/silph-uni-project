@@ -78,7 +78,7 @@ public class RequestForm {
 		}
 	}
 
-	@RequestMapping(value="/googleRequest",method= RequestMethod.POST)
+	@RequestMapping(value="/googleRequest",method= RequestMethod.GET)
 	public String newGoogleRequest( Model model, HttpSession session) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof OAuth2User) {
