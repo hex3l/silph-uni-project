@@ -86,7 +86,7 @@ public class RequestForm {
 
 			Customer customer = new Customer();
 			customer.setFirstName((String) user.getAttributes().get("given_name"));
-			customer.setFirstName((String) user.getAttributes().get("family_name"));
+			customer.setLastName((String) user.getAttributes().get("family_name"));
 			customer.setMail((String) user.getAttributes().get("email"));
 
 			BindingResult customerBindingResult = new BindException(customer, "Customer");
