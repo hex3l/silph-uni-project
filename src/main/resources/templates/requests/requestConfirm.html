@@ -20,7 +20,7 @@
 	            	    <td><a href="/"><button>Back to homepage</button></a></td>
 	            	</tr>
                 	<tr>
-                    	<td>Firstname: </td>
+                    	<td><br>Firstname: </td>
                     	<td th:text="${customer.firstName}"></td>
                 	</tr>
                 	<tr>
@@ -32,7 +32,7 @@
                     	<td th:text="${customer.mail}"></td>
                 	</tr>
 	            	<tr>
-                    	<td>Photos: </td>
+                    	<td><br>Photos: </td>
                 	</tr>
             	</table>
      	    	<th:block th:each="photo : ${customer.usageRequest.photos}">

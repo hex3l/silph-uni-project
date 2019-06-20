@@ -54,7 +54,7 @@
 			</tr>
 		</table>
 	</form>
-	<div th:if="${#fields.hasErrors('customer.usageRequest')}" th:errors="${customer.usageRequest}"></div>
+	<br><div th:if="${#fields.hasErrors('customer.usageRequest')}" th:errors="${customer.usageRequest}"></div>
 	<div th:replace="fragments/cart :: cart"></div>
 	</div>
 </body>
