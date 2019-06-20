@@ -32,7 +32,7 @@ public class PhotographerControllerAdmin {
 			model.addAttribute(photographer);
 			return "admin/photographer/photographerConfirm";
 		} else {
-			model.addAttribute("photographer", new Photographer());
+			model.addAttribute("photographer", photographer);
 			return "admin/photographer/newPhotographer";
 		}
 	}
