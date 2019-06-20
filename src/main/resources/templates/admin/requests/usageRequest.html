@@ -15,12 +15,11 @@
 	 <div th:replace="admin/fragments/header :: header"></div>
     <div class='content'>
     <h4 th:text="'Request > ' + ${request.id}"></h4>
+    <a href="/admin/requests"><button>Back to requests list</button></a>
+    <br>
     <table>
-            <tr>
-	      	    <td><a href="/admin/requests"><button>Back to requests list</button></a></td>
-          	</tr>
              <tr>
-              	<td><br>Firstname: </td>
+              	<td>Firstname: </td>
                	<td th:text="${request.customer.firstName}"></td>
               </tr>
               <tr>
@@ -32,8 +31,9 @@
                   <td th:text="${request.customer.mail}"></td>
                 </tr>
             	</table>
-            	<br>
+    <br>
     <div>Photos:</div> 
+    <br>
 	<th:block th:each="photo : ${request.photos}">
 	<div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'"></div>
      </th:block>

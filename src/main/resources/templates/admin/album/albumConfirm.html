@@ -15,23 +15,21 @@
     <div th:replace="admin/fragments/header :: header"></div>
     <div class='content'>
         <h4><a href="/admin">Admin</a> > Creation Successful</h4>
-            <table>
-            	<tr>
-	                <td><a href="/admin/album/new"><button>Add a new album</button></a></td>
-	            </tr>
+        <a href="/admin/album/new"><button>Add a new album</button></a>
+        <br>
+        <table>
                 <tr>
-                    <td><br>Name: </td>
+                    <td>Name: </td>
                     <td th:text="${album.name}"></td>
                 </tr>
 	            <tr>
                     <td><br>Photos: </td>
-
                 </tr>
-            </table>
-            <br>
-     	    <th:block th:each="photo : ${album.photos}">
-	          	<div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'"></div>
-	        </th:block>
+        </table>
+        <br>
+  	    <th:block th:each="photo : ${album.photos}">
+	    <div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'"></div>
+	    </th:block>
     </div>
 </body>
 </html>
