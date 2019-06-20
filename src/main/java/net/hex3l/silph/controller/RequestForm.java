@@ -82,12 +82,11 @@ public class RequestForm {
 	}
 
 	@RequestMapping(value="/googleRequest",method= RequestMethod.GET)
-	public String newGoogleRequest(Model model, HttpSession session, HttpServletRequest httpServletRequest) {
+	public String newGoogleRequest(@ModelAttribute("customer") Customer customer, Model model, HttpSession session, HttpServletRequest httpServletRequest) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof OAuth2User) {
 			OAuth2User user = (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-			Customer customer = new Customer();
 			customer.setFirstName((String) user.getAttributes().get("given_name"));
 			customer.setLastName((String) user.getAttributes().get("family_name"));
 			customer.setMail((String) user.getAttributes().get("email"));
