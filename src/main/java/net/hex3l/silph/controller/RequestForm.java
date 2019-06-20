@@ -100,10 +100,9 @@ public class RequestForm {
 				request.setCustomer(customer);
 			}
 			customer.setUsageRequest(request);
-			BindingResult customerBindingResult = new BindException(customer, "Customer");
-			this.customerValidator.validate(customer, customerBindingResult);
-			model.addAttribute(customerBindingResult);
-			if(!customerBindingResult.hasErrors()) {
+			BindingResult bindingResult = new BindException(customer, "Customer");
+			this.customerValidator.validate(customer, bindingResult);
+			if(!bindingResult.hasErrors()) {
 				this.customerService.add(customer);
 				this.usageRequestService.add(request);
 				model.addAttribute("customer", customer);
@@ -111,6 +110,7 @@ public class RequestForm {
 				session.removeAttribute("photos");
 				return "requests/requestConfirm";
 			}
+			model.addAttribute(bindingResult);
 		}
 		if(principal instanceof OAuth2User) {
 			model.addAttribute("confirm", "/googleRequest");
