@@ -52,17 +52,18 @@ public class RequestForm {
 		this.customerValidator.validate(customer, bindingResult);
 		UsageRequest request = new UsageRequest();
 		List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)session.getAttribute("photos"));
-		request.setPhotos(photos);
-		request.setCustomer(customer);
-		this.usageRequestValidator.validate(request, bindingResult);
-		if(!bindingResult.hasErrors()) {
-			this.customerService.add(customer);
-			this.usageRequestService.add(request);
-			model.addAttribute("request", request);
-			return "requests/requestConfirm";
-		} else {
-			return "requests/requestForm";
+		if(photos!=null) {
+			request.setPhotos(photos);
+			request.setCustomer(customer);
+			this.usageRequestValidator.validate(request, bindingResult);
+			if(!bindingResult.hasErrors()) {
+				this.customerService.add(customer);
+				this.usageRequestService.add(request);
+				model.addAttribute("request", request);
+				return "requests/requestConfirm";
+			}
 		}
+		return "requests/requestForm";
 	}
 	
 	@RequestMapping("/newRequest")
