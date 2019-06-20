@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta charset="ISO-8859-1">
 <title>Request form</title>
 </head>
@@ -15,6 +16,16 @@
 	<div th:replace="fragments/header :: header"></div>
 	<div class='content'>
 	<h4>New usage request</h4>
+			Login with
+				<div id="googlebutton">
+					<a href="https://silph.hex3l.net/oauth2/authorization/google">
+					<span class="icon"></span>
+					<span class="buttonText">Google</span>
+					</a>
+				</div>
+			<br><br>
+			<b>OR</b>
+			<br><br>
 	<form th:action="@{/request}" method="POST" th:object="${customer}" >
 		<table>
 			<tr>

@@ -1,6 +1,7 @@
 package net.hex3l.silph.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientPropertiesRegistrationAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -29,31 +30,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-        .csrf().disable()
-        .authorizeRequests()
-        .antMatchers("/admin/**").hasRole("ADMIN")
-        .anyRequest().permitAll()
-        .and()
-        .formLogin()
-        .defaultSuccessUrl("/admin", true)
-        .failureUrl("/login?error=true")
-        .and()
-        //.logout()
-        //.logoutSuccessUrl("/")
-        //.logoutUrl("/")
-        //.logoutUrl("/perform_logout")
-        //.deleteCookies("JSESSIONID");
-        //.logout()
-        //.logoutUrl("/perform_logout")
-        //.invalidateHttpSession(true)
-        //.deleteCookies("JSESSIONID");
-        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
-        .deleteCookies("JSESSIONID");
-		
+		.csrf().disable()
+		.authorizeRequests()
+		.antMatchers("/admin/**").hasRole("ADMIN")
+		.anyRequest().permitAll()
+		.and()
+		.formLogin()
+		.defaultSuccessUrl("/admin", true)
+		.failureUrl("/login?error=true")
+		.and()
+		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+		.deleteCookies("JSESSIONID").and().oauth2Login().defaultSuccessUrl("/googleRequest").and().oauth2Client();;
+
 		http.headers().frameOptions().sameOrigin();
-        
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
