@@ -102,7 +102,7 @@ public class RequestForm {
 			customer.setUsageRequest(request);
 			BindingResult customerBindingResult = new BindException(customer, "Customer");
 			this.customerValidator.validate(customer, customerBindingResult);
-			
+			model.addAttribute(customerBindingResult);
 			if(!customerBindingResult.hasErrors()) {
 				this.customerService.add(customer);
 				this.usageRequestService.add(request);
