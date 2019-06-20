@@ -39,23 +39,32 @@ public class PhotoControllerAdmin {
 		Photo photo = new Photo();
 		Photographer photographer = photographerService.findById(id);
 		try {
-			if(image[0].getContentType().contains("image/") && photographer != null) {
-				photo.setName(image[0].getOriginalFilename());
-				photo.setImage(image[0].getBytes());
-				photo.setExtension(image[0].getContentType().replace("image/", ""));
-				photo.setPhotographer(photographer);
+			if(image[0].getContentType().contains("image/")) {
+				if(photographer != null) {
+					photo.setName(image[0].getOriginalFilename());
+					photo.setImage(image[0].getBytes());
+					photo.setExtension(image[0].getContentType().replace("image/", ""));
+					photo.setPhotographer(photographer);
 
-				BindingResult bindingResult = new BindException(photo, "Photo");
-				this.photoValidator.validate(photo, bindingResult);
-				if (!bindingResult.hasErrors()) {
-					this.photoService.add(photo);
-					model.addAttribute("photo", photo);
-					return "admin/photo/photoUploadConfirm";
+					BindingResult bindingResult = new BindException(photo, "Photo");
+					this.photoValidator.validate(photo, bindingResult);
+					if (!bindingResult.hasErrors()) {
+						this.photoService.add(photo);
+						model.addAttribute("photo", photo);
+						return "admin/photo/photoUploadConfirm";
+					}
+				} else {
+					model.addAttribute("photographer_error", true);
 				}
 			}
+			else {
+				model.addAttribute("image_error", true);
+			}
+			
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+		model.addAttribute("photographers", photographerService.all());
 		return "admin/photo/newPhoto";
 	}
 

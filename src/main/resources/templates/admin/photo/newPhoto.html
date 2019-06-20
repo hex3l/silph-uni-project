@@ -20,6 +20,7 @@
                 <tr>
                     <td>Image: </td>
                     <td><input type="file" name="image"></td>
+                    <td th:if="${image_error != null}"> No image has been selected</td>
                 </tr>
                 <tr>
                     <td>Photographer: </td>
@@ -30,6 +31,7 @@
                     		</th:block>
                     	</select>
                     </td>
+                    <td th:if="${photographer_error != null}"> Before uploading a photo you should create a new photographer</td>
                 </tr>
                 <tr>
                     <td><button type="submit">Upload</button></td>
