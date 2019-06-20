@@ -54,9 +54,11 @@ public class RequestForm {
 			Model model, BindingResult bindingResult, HttpSession session) {
 		this.customerValidator.validate(customer, bindingResult);
 		UsageRequest request = new UsageRequest();
-		List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)session.getAttribute("photos"));
 
-		if(photos!=null) {
+		Object obj = session.getAttribute("photos");
+		if(obj != null) {
+			List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)obj);
+
 			request.setPhotos(photos);
 			request.setCustomer(customer);
 			this.usageRequestValidator.validate(request, bindingResult);
@@ -66,6 +68,12 @@ public class RequestForm {
 				model.addAttribute("request", request);
 				return "requests/requestConfirm";
 			}
+		}
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof OAuth2User) {
+			model.addAttribute("confirm", "/googleRequest");
+		} else {
+			model.addAttribute("confirm", "/oauth2/authorization/google");
 		}
 		return "requests/requestForm";
 	}
@@ -104,6 +112,11 @@ public class RequestForm {
 				}
 			}
 		}
+		if(principal instanceof OAuth2User) {
+			model.addAttribute("confirm", "/googleRequest");
+		} else {
+			model.addAttribute("confirm", "/oauth2/authorization/google");
+		}
 		model.addAttribute("customer", new Customer());
 		return "requests/requestForm";
 	}
@@ -113,7 +126,13 @@ public class RequestForm {
 		ModelAndView mav = new ModelAndView("requests/requestForm");
 		Customer customer = new Customer();
 		mav.addObject("customer", customer);
-
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof OAuth2User) {
+			mav.addObject("confirm", "/googleRequest");
+		} else {
+			mav.addObject("confirm", "/oauth2/authorization/google");
+		}
+		
 		return cartService.photoSelection(mav, session);
 	}
 }
