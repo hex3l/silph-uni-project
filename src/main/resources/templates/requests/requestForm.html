@@ -16,6 +16,7 @@
 	<div th:replace="fragments/header :: header"></div>
 	<div class='content'>
 	<h4>New usage request</h4>
+	<th:block th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
 			Login with
 				<div id="googlebutton">
 					<a th:href="${confirm}">
@@ -28,6 +29,7 @@
 			<br><br>
 			<b>OR</b>
 			<br><br>
+	</th:block>
 	<form th:action="@{/request}" method="POST" th:object="${customer}" >
 		<table>
 			<tr>

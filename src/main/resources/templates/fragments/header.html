@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>		
 	<link rel='stylesheet' href='/css/style.css' />
 	<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
@@ -29,7 +29,10 @@
 								</a>
 							</li>
 							<li style='float:right;'>
-								<a href="/login">
+								<a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="/admin">
+									<i class='fas fa-user-shield'></i> ADMIN
+								</a>
+								<a th:unless="${#authorization.expression('hasRole(''ADMIN'')')}" href="/login">
 									<i class='fas fa-user-shield'></i> ADMIN
 								</a>
 							</li>

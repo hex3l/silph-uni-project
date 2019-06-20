@@ -3,6 +3,8 @@ package net.hex3l.silph.controller;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -51,7 +53,7 @@ public class RequestForm {
 	
 	@RequestMapping(value="/request",method= RequestMethod.POST)
 	public String newRequest(@Valid @ModelAttribute("customer") Customer customer, 
-			Model model, BindingResult bindingResult, HttpSession session) {
+			Model model, BindingResult bindingResult, HttpSession session, HttpServletRequest httpServletRequest) {
 		this.customerValidator.validate(customer, bindingResult);
 		UsageRequest request = new UsageRequest();
 
@@ -79,7 +81,7 @@ public class RequestForm {
 	}
 
 	@RequestMapping(value="/googleRequest",method= RequestMethod.GET)
-	public String newGoogleRequest(Model model, HttpSession session) {
+	public String newGoogleRequest(Model model, HttpSession session, HttpServletRequest httpServletRequest) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof OAuth2User) {
 			OAuth2User user = (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -122,7 +124,7 @@ public class RequestForm {
 	}
 	
 	@RequestMapping("/newRequest")
-	public ModelAndView addRequest(HttpSession session){
+	public ModelAndView addRequest(HttpSession session, HttpServletRequest httpServletRequest){
 		ModelAndView mav = new ModelAndView("requests/requestForm");
 		Customer customer = new Customer();
 		mav.addObject("customer", customer);
