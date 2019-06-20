@@ -37,7 +37,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin()
 		.defaultSuccessUrl("/admin", true)
-		.failureUrl("/login?error=true")
 		.and()
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
 		.deleteCookies("JSESSIONID").and().oauth2Login().defaultSuccessUrl("/googleRequest").and().oauth2Client();;
