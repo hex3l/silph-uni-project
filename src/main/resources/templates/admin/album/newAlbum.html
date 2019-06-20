@@ -8,16 +8,19 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
+<meta charset="ISO-8859-1">
+<title>New album</title>
 </head>
 <body>
     <div th:replace="admin/fragments/header :: header"></div>
     <div class='content'>
-        <h4>Admin > New album</h4>
+        <h4><a href="/admin">Admin</a> > New album</h4>
         <form method="post" th:action="@{/admin/album/new}" th:object="${album}">
             <table>
                 <tr>
                     <td>Name: </td>
                     <td><input type="text" th:field="*{name}"></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
                 </tr>
                 <tr>
                     <td><button type="submit">Create</button></td>
