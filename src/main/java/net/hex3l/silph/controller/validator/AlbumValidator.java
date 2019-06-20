@@ -18,7 +18,7 @@ public class AlbumValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "required");
 		Album album = (Album) target;
-		if(album.getPhotos().isEmpty()) {
+		if(album.getPhotos() == null || album.getPhotos().isEmpty()) {
 			errors.rejectValue("photos", "required");
 		}
 	}

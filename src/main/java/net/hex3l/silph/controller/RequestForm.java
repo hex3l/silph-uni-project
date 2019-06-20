@@ -52,9 +52,8 @@ public class RequestForm {
 	private CartService cartService;
 	
 	@RequestMapping(value="/request",method= RequestMethod.POST)
-	public String newRequest(@Valid @ModelAttribute("customer") Customer customer, 
+	public String newRequest(@ModelAttribute("customer") Customer customer, 
 			Model model, BindingResult bindingResult, HttpSession session, HttpServletRequest httpServletRequest) {
-		this.customerValidator.validate(customer, bindingResult);
 		UsageRequest request = new UsageRequest();
 
 		Object obj = session.getAttribute("photos");
@@ -62,14 +61,15 @@ public class RequestForm {
 			List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)obj);
 
 			request.setPhotos(photos);
+		}
+		customer.setUsageRequest(request);
+		this.customerValidator.validate(customer, bindingResult);
+		if(!bindingResult.hasErrors()) {
 			request.setCustomer(customer);
-			this.usageRequestValidator.validate(request, bindingResult);
-			if(!bindingResult.hasErrors()) {
-				this.customerService.add(customer);
-				this.usageRequestService.add(request);
-				model.addAttribute("request", request);
-				return "requests/requestConfirm";
-			}
+			this.customerService.add(customer);
+			this.usageRequestService.add(request);
+			session.removeAttribute("photos");
+			return "requests/requestConfirm";
 		}
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof OAuth2User) {
@@ -77,6 +77,7 @@ public class RequestForm {
 		} else {
 			model.addAttribute("confirm", "/oauth2/authorization/google");
 		}
+		model.addAttribute("request", new UsageRequest());
 		return "requests/requestForm";
 	}
 
@@ -91,27 +92,24 @@ public class RequestForm {
 			customer.setLastName((String) user.getAttributes().get("family_name"));
 			customer.setMail((String) user.getAttributes().get("email"));
 
-			BindingResult customerBindingResult = new BindException(customer, "Customer");
-			this.customerValidator.validate(customer, customerBindingResult);
-
 			UsageRequest request = new UsageRequest();
 			Object obj = session.getAttribute("photos");
 			if(obj != null) {
 				List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)obj);
 				request.setPhotos(photos);
 				request.setCustomer(customer);
-
-				BindingResult usageRequestBindingResult = new BindException(request, "UsageRequest");
-				this.usageRequestValidator.validate(request, usageRequestBindingResult);
-
-				if(!customerBindingResult.hasErrors() && !usageRequestBindingResult.hasErrors()) {
-					this.customerService.add(customer);
-					this.usageRequestService.add(request);
-					model.addAttribute("customer", customer);
-					model.addAttribute("request", request);
-					session.removeAttribute("photos");
-					return "requests/requestConfirm";
-				}
+			}
+			customer.setUsageRequest(request);
+			BindingResult customerBindingResult = new BindException(customer, "Customer");
+			this.customerValidator.validate(customer, customerBindingResult);
+			
+			if(!customerBindingResult.hasErrors()) {
+				this.customerService.add(customer);
+				this.usageRequestService.add(request);
+				model.addAttribute("customer", customer);
+				
+				session.removeAttribute("photos");
+				return "requests/requestConfirm";
 			}
 		}
 		if(principal instanceof OAuth2User) {
@@ -126,8 +124,8 @@ public class RequestForm {
 	@RequestMapping("/newRequest")
 	public ModelAndView addRequest(HttpSession session, HttpServletRequest httpServletRequest){
 		ModelAndView mav = new ModelAndView("requests/requestForm");
-		Customer customer = new Customer();
-		mav.addObject("customer", customer);
+		mav.addObject("customer", new Customer());
+		mav.addObject("request", new UsageRequest());
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(principal instanceof OAuth2User) {
 			mav.addObject("confirm", "/googleRequest");

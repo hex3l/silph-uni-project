@@ -18,7 +18,7 @@ public class UsageRequestValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		UsageRequest request = (UsageRequest) target;
-		if(request.getPhotos().isEmpty()) {
+		if(request.getPhotos()==null || request.getPhotos().isEmpty()) {
 			errors.rejectValue("photos", "required");
 		}
 	}

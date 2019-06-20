@@ -6,6 +6,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import net.hex3l.silph.model.Customer;
+import net.hex3l.silph.model.UsageRequest;
 
 @Component
 public class CustomerValidator implements Validator {
@@ -19,6 +20,10 @@ public class CustomerValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mail", "required");
+		UsageRequest request = ((Customer) target).getUsageRequest();
+		if(request.getPhotos()==null || request.getPhotos().isEmpty()) {
+			errors.rejectValue("usageRequest", "required");
+		}
 		
 		}
 

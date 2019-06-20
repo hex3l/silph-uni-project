@@ -24,9 +24,11 @@
                     <td th:text="${album.name}"></td>
                 </tr>
 	            <tr>
-                    <td>Photos: </td>
+                    <td><br>Photos: </td>
+
                 </tr>
             </table>
+            <br>
      	    <th:block th:each="photo : ${album.photos}">
 	          	<div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'"></div>
 	        </th:block>

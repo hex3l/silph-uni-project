@@ -17,7 +17,7 @@
 	<div class='content'>
 	<h4>New usage request</h4>
 	<th:block th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
-			Login with
+			Request with
 				<div id="googlebutton">
 					<a th:href="${confirm}">
 						<div id="googlebutton">
@@ -54,6 +54,7 @@
 			</tr>
 		</table>
 	</form>
+	<div th:if="${#fields.hasErrors('customer.usageRequest')}" th:errors="${customer.usageRequest}"></div>
 	<div th:replace="fragments/cart :: cart"></div>
 	</div>
 </body>

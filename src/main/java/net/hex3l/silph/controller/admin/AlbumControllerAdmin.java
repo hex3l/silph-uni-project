@@ -35,9 +35,23 @@ public class AlbumControllerAdmin {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/admin/album/new",method= RequestMethod.POST)
-	public String createAlbum(@Valid @ModelAttribute("album") Album album, 
-			Model model, HttpSession session) {
-		album.setPhotos((List<Photo>)photoService.findAllById((Set<Long>)session.getAttribute("albumSelection")));
+	public String createAlbum(@ModelAttribute("album") Album album, 
+			Model model, HttpSession session, BindingResult bindingResult) {
+		Object obj = session.getAttribute("photos");
+		if(obj != null) {
+			List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)obj);
+			album.setPhotos(photos);
+		}
+		this.albumValidator.validate(album, bindingResult);
+		if(!bindingResult.hasErrors()) {
+			this.albumService.add(album);
+			model.addAttribute(album);
+			return "admin/album/albumConfirm";
+		}
+		model.addAttribute(bindingResult);
+		return "admin/album/newAlbum";
+		
+		/*album.setPhotos((List<Photo>)photoService.findAllById((Set<Long>)session.getAttribute("albumSelection")));
 		BindingResult bindingResult = new BindException(album, "Album");
 		this.albumValidator.validate(album, bindingResult);
 		if(!bindingResult.hasErrors()) {
@@ -45,8 +59,9 @@ public class AlbumControllerAdmin {
 			model.addAttribute(album);
 			return "admin/album/albumConfirm";
 		} else {
+			model.addAttribute(bindingResult);
 			return "admin/album/newAlbum";
-		}
+		} */
 	}
 	
 	@RequestMapping(value="/admin/album/new",method= RequestMethod.GET)

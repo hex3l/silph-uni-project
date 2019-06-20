@@ -17,12 +17,12 @@
         <form method="post" th:action="@{/admin/photographer/new}" th:object="${photographer}">
             <table>
                 <tr>
-                    <td>Name: </td>
+                    <td>Firstname: </td>
                     <td><input type="text" th:field="*{name}"></td>
                     <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
                 </tr>
                 <tr>
-                    <td>Surname: </td>
+                    <td>Lastname: </td>
                     <td><input type="text" th:field="*{surname}"></td>
                     <td th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></td>
                 </tr>
