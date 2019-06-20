@@ -35,7 +35,7 @@
                     	<td>Photos: </td>
                 	</tr>
             	</table>
-     	    	<th:block th:each="photo : ${request.photos}">
+     	    	<th:block th:each="photo : ${customer.usageRequest.photos}">
 	          		<div class='img-box' th:style="'background:url(\'/photo/' + ${photo.id} + '.' + ${photo.extension} + '\');background-size: contain;background-position: center;background-repeat: no-repeat;'"></div>
 	        	</th:block>
     </div>
