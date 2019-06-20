@@ -7,8 +7,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +55,7 @@ public class RequestForm {
 		this.customerValidator.validate(customer, bindingResult);
 		UsageRequest request = new UsageRequest();
 		List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)session.getAttribute("photos"));
+
 		if(photos!=null) {
 			request.setPhotos(photos);
 			request.setCustomer(customer);
@@ -65,16 +69,51 @@ public class RequestForm {
 		}
 		return "requests/requestForm";
 	}
+
+	@RequestMapping(value="/googleRequest",method= RequestMethod.GET)
+	public String newGoogleRequest(Model model, HttpSession session) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof OAuth2User) {
+			OAuth2User user = (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			Customer customer = new Customer();
+			customer.setFirstName((String) user.getAttributes().get("given_name"));
+			customer.setFirstName((String) user.getAttributes().get("family_name"));
+			customer.setMail((String) user.getAttributes().get("email"));
+
+			BindingResult customerBindingResult = new BindException(customer, "Customer");
+			this.customerValidator.validate(customer, customerBindingResult);
+
+			UsageRequest request = new UsageRequest();
+			Object obj = session.getAttribute("photos");
+			if(obj != null) {
+				List<Photo> photos = (List<Photo>) photoService.findAllById((Set<Long>)obj);
+				request.setPhotos(photos);
+				request.setCustomer(customer);
+
+				BindingResult usageRequestBindingResult = new BindException(request, "UsageRequest");
+				this.usageRequestValidator.validate(request, usageRequestBindingResult);
+
+				if(!customerBindingResult.hasErrors() && !usageRequestBindingResult.hasErrors()) {
+					this.customerService.add(customer);
+					this.usageRequestService.add(request);
+					model.addAttribute("customer", customer);
+					model.addAttribute("request", request);
+					session.removeAttribute("photos");
+					return "requests/requestConfirm";
+				}
+			}
+		}
+		model.addAttribute("customer", new Customer());
+		return "requests/requestForm";
+	}
 	
 	@RequestMapping("/newRequest")
 	public ModelAndView addRequest(HttpSession session){
 		ModelAndView mav = new ModelAndView("requests/requestForm");
-		//UsageRequest request = new UsageRequest();
-		//request.setPhotos((List<Photo>)session.getAttribute("photos"));
-		//model.addAttribute("request", request);
 		Customer customer = new Customer();
 		mav.addObject("customer", customer);
+
 		return cartService.photoSelection(mav, session);
 	}
-
 }
