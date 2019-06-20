@@ -30,6 +30,7 @@
         <br>
         <div th:if="${#fields.hasErrors('album.photos')}" th:errors="${album.photos}"></div>
     </div>
+    <br>
     <iframe th:src="@{/admin/album/photos}" class="iframe-album"></iframe>
 </body>
 </html>
